@@ -1,0 +1,91 @@
+/* Estilos de la página y estructura */
+#tickets-header {
+    margin-top: 0;
+}
+
+#tickets-header-container {
+    background-color: var(--background-light) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+#tickets-form-container {
+    width: 80% !important;
+}
+
+#tickets-form-container, #tickets-filter-container, .table-responsive, #tickets-pages-container {
+    background-color: var(--background-light) !important;
+    border-radius: 1rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.form-title {
+    color: var(--primary);
+}
+
+@media (min-width: 700px) {
+    #service-title {
+        margin-top: 2rem;
+    }
+}
+
+@media (max-width: 430px) {
+    .form-column {
+        margin-bottom: 1.5rem;
+    }
+}
+
+/* Estilos para formularios */
+.label {
+    color: var(--secondary);
+    padding: 0 0.2rem;
+    font-size: 0.875rem;
+}
+
+/* Estilos para botones de prioridad */
+/* altura del botón */
+.priority-container {
+    height: 80px;
+}
+
+.btn-priority {
+    color: var(--secondary);
+    border: 1px solid var(--secondary-light);
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+}
+
+.btn-priority:hover {
+    background-color: var(--primary-dark) !important;
+    color: var(--primary-light) !important;
+    border-color: var(--primary) !important;
+    border-width: 2px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn-priority:active {
+  transform: scale(0.98);
+  box-shadow: var(--primary-dark);
+}
+
+.btn-check:checked + .btn-priority {
+    background-color: var(--primary-light);
+    border-color: var(--primary);
+    border-width: 2px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 770px) {
+    .btn-priority {
+        font-size: 13px;
+    }
+}
+
+@media (min-width: 500px) and (max-width: 768px) {
+    #filter-btn {
+        margin-top: 1rem;
+    }
+}
