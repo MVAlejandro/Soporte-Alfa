@@ -162,6 +162,10 @@ input::placeholder, textarea::placeholder, #default-option {
     .filter {
         margin-bottom: 1.5rem;
     }
+
+    .edit {
+        margin-bottom: 1.5rem;
+    }
 }
     
 

@@ -1,0 +1,57 @@
+
+/* Estilos de la página y estructura */
+#reports-header {
+    margin-top: 0;
+}
+
+#reports-header-container {
+    background-color: var(--background-light) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+#reports-filter-container, #graphic-personal-container, #graphic-departament-container, #register-filter-container, .card, .table-responsive {
+    background-color: var(--background-light) !important;
+    border-radius: 1rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }   
+}
+
+/* Estilos de cards */
+.card {
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+@media (max-width: 770px) {
+    .resume-card {
+        font-size: 15px !important;
+    }
+}
+
+/* Estilos de texto para la tabla */
+th {
+    color: var(--secondary) !important;
+}
+
+.report-week {
+    font-weight: bold;
+}
+
+.report-year {
+    font-size: 13px;
+    color: var(--secondary) !important;
+}
+

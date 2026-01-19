@@ -34,7 +34,7 @@
                         <h4 class="fw-bold">Solicitar mantenimiento</h4>
                     </div>
                     <div class="col-4 col-md-3 col-lg-2 d-flex align-items-center">
-                        <button id="btn-add-client" class="btn btn-primary d-flex align-items-center" data-vent-only>
+                        <button id="btn-add-client" class="btn btn-primary d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#edit-modal">
                             <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
                                 <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
                             </svg>
@@ -254,7 +254,9 @@
                         </tr>
                     </thead>
                     <tbody>
-                        
+                        <tr>
+                            <td class="text-center" colspan="8">No hay tickets registrados</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -278,6 +280,111 @@
             </div>
         </section>
     </main>
+
+    <!-- Modal de edición para cada registro -->
+    <div class="modal fade" id="edit-modal" tabindex="-1" aria-labelledby="edit-modalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content pt-3 pb-3">
+                <div class="modal-header">
+                    <div class="row">
+                        <div class="col d-flex align-items-center">
+                            <div class="ms-4 me-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16" style="color:var(--primary)">
+                                    <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                    <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
+                                </svg>
+                            </div>
+                            <h5 class="modal-title" id="edit-modalLabel">Actualizar ticket</h5>
+                        </div>
+                    </div>
+                    <button type="button" class="btn-close me-3" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <form id="ticket-edit-form">
+                            <input type="hidden" id="edit-id-ticket">
+                            <div class="row ms-2 me-2 pt-3 pb-3">
+                                <div class="col-md-4 col-lg-3 label-over-border edit">
+                                    <label for="edit-id" class="form-label m-2">ID</label>
+                                    <input type="text" class="form-control" id="edit-id" disabled>
+                                </div>
+                                <div class="col-md-4 col-lg-3 ms-auto label-over-border edit">
+                                    <label for="edit-sol-date" class="form-label m-2">Fecha solicitud</label>
+                                    <input type="text" class="form-control" id="edit-sol-date" disabled>
+                                </div>
+                                <div class="col-md-4 col-lg-3 label-over-border edit">
+                                    <label for="edit-finish-date" class="form-label m-2">Fecha finalizado</label>
+                                    <input type="text" class="form-control" id="edit-finish-date" disabled>
+                                </div>
+                            </div>
+                            <div class="row ms-2 me-2 pt-3 pb-3">
+                                <div class="col-md-6 label-over-border edit">
+                                    <label for="edit-employee" class="form-label m-2">Solicitante</label>
+                                    <input type="text" class="form-control" id="edit-employee" disabled>
+                                </div>
+                                <div class="col-md-6 label-over-border edit">
+                                    <label for="edit-unit" class="form-label m-2">Equipo</label>
+                                    <input type="text" class="form-control" id="edit-unit" disabled>
+                                </div>
+                            </div>
+                            <div class="row ms-2 me-2 pt-3 pb-3">
+                                <div class="col-md-6 label-over-border edit">
+                                    <label for="edit-departament" class="form-label m-2">Departamento</label>
+                                    <input type="text" class="form-control" id="edit-departament" disabled>
+                                </div>
+                                <div class="col-md-6 label-over-border edit">
+                                    <label for="edit-priority" class="form-label m-2">Prioridad</label>
+                                    <input type="text" class="form-control" id="edit-priority" disabled>
+                                </div>
+                            </div>
+                            <div class="row ms-2 me-2 pt-3 pb-3">
+                                <div class="col-md-6 label-over-border edit">
+                                    <label for="edit-status" class="form-label m-2">Estado</label>
+                                    <select id="edit-status" class="form-select" aria-label="Default select example">
+                                        <option value="0">Seleccione...</option>
+                                        <option value="Pendiente">Pendiente</option>
+                                        <option value="Inconcluso">Inconcluso</option>
+                                        <option value="Terminado">Terminado</option>
+                                        <option value="Cancelado">Cancelado</option>
+                                    </select>
+                                    <p class="error invalid-feedback" id="error-editStatus" style="color: red;"></p>
+                                </div>
+                                <div class="col-md-6 label-over-border edit">
+                                    <label for="edit-progress" class="form-label m-2">Progreso</label>
+                                    <select id="edit-progress" class="form-select" aria-label="Default select example">
+                                        <option value="0">Seleccione...</option>
+                                        <option value="Abierto">Abierto</option>
+                                        <option value="Terminado">Terminado</option>
+                                        <option value="Cancelado">Cancelado</option>
+                                        <option value="Otro">Otro</option>
+                                    </select>
+                                    <p class="error invalid-feedback" id="error-editProgress" style="color: red;"></p>
+                                </div>
+                            </div>
+                            <div class="row ms-2 me-2 pt-3 pb-3">
+                                <div class="col label-over-border edit">
+                                    <label for="edit-description" class="form-label m-2">Descripción</label>
+                                    <textarea id="edit-description" class="form-control" rows="4" placeholder="Descripción detallada de la solicitud"></textarea>
+                                    <p class="error invalid-feedback" id="error-editDescription" style="color: red;"></p>
+                                </div>
+                            </div>
+                            <div class="row ms-2 me-2 pt-3 pb-3">
+                                <div class="col label-over-border edit">
+                                    <label for="edit-observations" class="form-label m-2">Observaciones</label>
+                                    <input type="text" class="form-control" id="edit-observations" placeholder="Observaciones generales">
+                                    <p class="error invalid-feedback" id="error-editObservations" style="color: red;"></p>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer me-4">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button id="btn-edit-entry" class="btn btn-primary">Guardar cambios</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- FOOTER -->
     <footer id="site-footer">
