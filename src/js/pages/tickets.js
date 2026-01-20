@@ -53,3 +53,8 @@ editModal.addEventListener('hidden.bs.modal', () => {
         el.value = '';
     });
 });
+
+// Declarar el botón de impresión
+document.getElementById('btn-print').addEventListener('click', function() {
+    window.print();
+});

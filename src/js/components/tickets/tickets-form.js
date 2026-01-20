@@ -1,7 +1,7 @@
 import supabase from '../../supabase/supabase-client.js'
 // Servicios Supabase
 import { createTicket } from '../../services/tickets-services.js'; 
-// import { renderTicketsTable } from './tickets-table.js';
+import { renderTicketsTable } from './tickets-table.js';
 // Utilidades
 import { textValidate, inputValidate, selectValidate, radioValidate } from '../../utils/form-validations.js';
 

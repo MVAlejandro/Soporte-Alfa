@@ -1,6 +1,7 @@
 import supabase from '../../supabase/supabase-client.js'
 // Servicios Supabase
-import { updateTicket, deleteTicket } from '../../services/tickets-services.js'; 
+import { updateTicket, deleteTicket } from '../../services/tickets-services.js';
+import { ticketsFilter } from './tickets-filter..js'; 
 import { renderTicketsTable } from './tickets-table.js'; 
 // Utilidades
 import { textValidate, inputValidate, selectValidate } from '../../utils/form-validations.js';
@@ -82,7 +83,7 @@ document.getElementById('btn-edit-entry').addEventListener('click', async functi
         });
 
         // Recarga la tabla con los datos actualizados
-        await renderTicketsTable();
+        ticketsFilter(renderTicketsTable);
     } catch (err) {
         console.error('Error al actualizar ticket:', err);
         Swal.fire({

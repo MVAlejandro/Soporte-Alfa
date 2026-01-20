@@ -31,7 +31,7 @@
         <section id="tickets-resume" class="pt-2">
             <div class="container">
                 <div id="tickets-resume-container" class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-6 col-lg-3">
                         <div class="card resume-card mt-2">
                             <div class="card-body d-flex align-items-center">
                                 <div class="icon-circle">
@@ -47,7 +47,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-6 col-lg-3">
                         <div class="card resume-card mt-2">
                             <div class="card-body d-flex align-items-center">
                                 <div class="icon-circle">
@@ -63,7 +63,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-6 col-lg-3">
                         <div class="card resume-card mt-2">
                             <div class="card-body d-flex align-items-center">
                                 <div class="icon-circle">
@@ -78,7 +78,23 @@
                                 </div>
                             </div>
                         </div>
-                    </div> 
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="card resume-card mt-2">
+                            <div class="card-body d-flex align-items-center">
+                                <div class="icon-circle">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-stopwatch" viewBox="0 0 16 16">
+                                        <path d="M8.5 5.6a.5.5 0 1 0-1 0v2.9h-3a.5.5 0 0 0 0 1H8a.5.5 0 0 0 .5-.5z"/>
+                                        <path d="M6.5 1A.5.5 0 0 1 7 .5h2a.5.5 0 0 1 0 1v.57c1.36.196 2.594.78 3.584 1.64l.012-.013.354-.354-.354-.353a.5.5 0 0 1 .707-.708l1.414 1.415a.5.5 0 1 1-.707.707l-.353-.354-.354.354-.013.012A7 7 0 1 1 7 2.071V1.5a.5.5 0 0 1-.5-.5M8 3a6 6 0 1 0 .001 12A6 6 0 0 0 8 3"/>
+                                    </svg>
+                                </div>
+                                <div class="card-text ms-3">
+                                    <p>Prom. respuesta</p>
+                                    <p id="average-text" class="general-report-cant text-muted">-</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>           
                 </div>
             </div>
         </section>
@@ -88,20 +104,33 @@
             <div id="recent-container" class="container pt-3">
                 <div class="row ps-3 pe-3 pb-3">
                     <div class="col-6 col-md-9 col-lg-10">
-                        <h4><a href="./report.html">Solicitudes recientes</a></h4>
+                        <h4><a href="./report.html">Solicitudes de hoy</a></h4>
+                    </div>
+                    <div class="col-6 col-md-3 col-lg-2 d-flex justify-content-end">
+                        <h5 id="dateHeader" class="fw-bold">- / - / -</h5>
                     </div>
                 </div>
-                <div id="recent-table-container" class="container table-responsive row justify-content-center p-0">
+                <div class="row ms-2 me-2 d-none">
+                    <div class="col-md col-lg-3 d-flex align-items-center label-over-border filter">
+                        <label for="start-date" class="form-label m-2">Fecha inicio</label>
+                        <input type="date" class="form-control" id="start-date">
+                    </div>
+                    <div class="col-md col-lg-3 d-flex align-items-center label-over-border filter">
+                        <label for="end-date" class="form-label m-2">Fecha fin</label>
+                        <input type="date" class="form-control" id="end-date">
+                    </div>
+                </div>
+                <div id="register-container" class="container table-responsive row justify-content-center p-0">
                     <div class="col-lg-10">
-                        <table id="recent-table" class="table table-hover">
+                        <table id="register-table" class="table table-hover">
                             <thead>
                                 <tr class="table-light">
                                     <th class="p-3 ps-4">ID</th>
-                                    <th class="p-3 ps-2">CLIENTE</th>
+                                    <th class="p-3 ps-2">SOLICITANTE</th>
                                     <th class="p-3 ps-2">EQUIPO</th>
                                     <th class="text-center p-3">PRIORIDAD</th>
                                     <th class="text-center p-3">ESTADO</th>
-                                    <th class="p-3 ps-2">FECHA</th>
+                                    <th class="text-center p-3">PROGRESO</th>
                                 </tr>
                             </thead>
                             <tbody>

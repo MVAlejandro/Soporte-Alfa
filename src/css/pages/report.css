@@ -15,6 +15,12 @@
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
+.graphic-report-container {
+    position: relative;
+    height: 300px;
+    width: 100%;
+}
+
 @keyframes fadeInUp {
     from {
         opacity: 0;
@@ -27,6 +33,11 @@
 }
 
 /* Estilos de cards */
+.general-report-cant {
+    font-size: 30px;
+    font-weight: bold;
+}
+
 .card {
     transition: transform 0.3s ease;
 }
@@ -46,12 +57,37 @@ th {
     color: var(--secondary) !important;
 }
 
-.report-week {
-    font-weight: bold;
-}
-
-.report-year {
+/* Estilos de texto para la tabla */
+.ticket-date, .ticket-departament {
     font-size: 13px;
     color: var(--secondary) !important;
 }
 
+.ticket-status, .ticket-progress {
+    padding: 5px 12px 5px 12px;
+    border-radius: 50px;
+    font-weight: bold;
+    display: inline-block;
+}
+
+/* Estilos para impresión */
+@media print {
+    .container {
+        margin: 0 !important;
+        padding: 0 0 1.5rem 0 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+
+    #register-container {
+        width: 100% !important;
+        padding: 0 !important;
+        margin: 0 auto !important;
+        font-size: 12px !important;
+    }
+
+    /* Asegurar que no se corten filas entre páginas */
+    tr {
+        page-break-inside: avoid !important;
+    }
+}
