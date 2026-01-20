@@ -78,6 +78,14 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+.btn-priority.is-invalid {
+    border: 1px solid #dc3545;
+}
+
+.btn-priority.is-valid {
+    border: 1px solid #198754;
+}
+
 @media (max-width: 770px) {
     .btn-priority {
         font-size: 13px;
@@ -88,4 +96,17 @@
     #filter-btn {
         margin-top: 1rem;
     }
+}
+
+/* Estilos de texto para la tabla */
+.ticket-departament {
+    font-size: 13px;
+    color: var(--secondary) !important;
+}
+
+.ticket-status, .ticket-progress {
+    padding: 5px 12px 5px 12px;
+    border-radius: 50px;
+    font-weight: bold;
+    display: inline-block;
 }
