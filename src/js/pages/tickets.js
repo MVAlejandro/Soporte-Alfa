@@ -15,6 +15,7 @@ import { addTicket } from '../components/tickets/tickets-form.js';
 import { ticketsFilter } from '../components/tickets/tickets-filter..js';
 import { renderTicketsTable } from '../components/tickets/tickets-table.js';
 import { renderTicketsEditModal } from '../components/tickets/tickets-modal.js';
+import { generatePDF } from '../components/tickets/tickets-print.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
     // Generar tabla con el día actual
@@ -42,6 +43,15 @@ editModal.addEventListener('shown.bs.modal', event => {
     const button = event.relatedTarget;
     const ticketData = JSON.parse(button.getAttribute('ticket-data'));
     renderTicketsEditModal(ticketData);
+
+    // Declarar el botón de guardado
+    const btnSave = editModal.querySelector('#btn-save');
+
+    // Elimina eventos anteriores para evitar duplicados
+    btnSave.onclick = async function () {
+        const doc = await generatePDF(ticketData);
+        doc.save(`Ticket-${ticketData.id_ticket}.pdf`);
+    };
 });
 // Al cerrar modal
 editModal.addEventListener('hidden.bs.modal', () => {
@@ -52,9 +62,4 @@ editModal.addEventListener('hidden.bs.modal', () => {
     editModal.querySelectorAll('input, select').forEach(el => {
         el.value = '';
     });
-});
-
-// Declarar el botón de impresión
-document.getElementById('btn-print').addEventListener('click', function() {
-    window.print();
 });

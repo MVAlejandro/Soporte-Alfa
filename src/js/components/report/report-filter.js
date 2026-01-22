@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 })
 
 // Función de filtrado por valores seleccionados
-export async function reportFilter() {
+export async function reportFilter(renderCallback) {
     const startDate = document.getElementById('start-date').value;
     const endDate = document.getElementById('end-date').value;
 
@@ -41,5 +41,9 @@ export async function reportFilter() {
         return dateOk;
     });
 
-    renderReportTable(filtered);
+    if (renderCallback) {
+        renderCallback(filtered);
+    }
+
+    return filtered;
 }

@@ -95,7 +95,7 @@ export async function renderAverage(tickets = []) {
         return acc + (end - start) / (1000 * 60 * 60 * 24); // MS por día
     }, 0);
 
-    const averageDays = (totalDays / finishedTickets.length).toFixed(2);
+    const averageDays = (totalDays / finishedTickets.length).toFixed(1);
 
     // Generar el contenido
     element.textContent = `${averageDays || 0} días`;
