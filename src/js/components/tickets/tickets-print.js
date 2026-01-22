@@ -48,46 +48,46 @@ export async function generatePDF(ticket) {
     textCenter(ticket.fecha_creado, 375, 41);
 
     // Tabla solicitante
-    drawRect(15, 55, 186, 51, 0.1);
-    drawRect(15, 55, 186, 8, 0.1);
+    drawRect(15, 48, 186, 61, 0.1);
+    drawRect(15, 48, 186, 6, 0.1);
 
     // Cliente
-    doc.setFontSize(12);
-    textCenter("SOLICITANTE DEL SERVICIO", 215.9, 60.5);
+    doc.setFontSize(11);
+    textCenter("SOLICITANTE DEL SERVICIO", 215.9, 52.5);
     // Insertar información del cliente
     doc.setFontSize(10);
     doc.setFont("helvetica", "bold");
-    doc.text(`Nombre:`, 25, 71);
+    doc.text(`Nombre:`, 25, 62);
     doc.setFont("helvetica", "normal");
-    doc.text(`${ticket.empleado}`, 25, 76);
+    doc.text(`${ticket.empleado}`, 25, 67);
 
     doc.setFont("helvetica", "bold");
-    doc.text(`Departamento:`, 153, 71);
+    doc.text(`Departamento:`, 153, 62);
     doc.setFont("helvetica", "normal");
-    doc.text(`${ticket.departamento}`, 153, 76);
+    doc.text(`${ticket.departamento}`, 153, 67);
 
     doc.setFont("helvetica", "bold");
-    doc.text(`Equipo:`, 25, 83);
+    doc.text(`Equipo:`, 25, 74);
     doc.setFont("helvetica", "normal");
-    doc.text(`${ticket.unidad}`, 25, 88);
+    doc.text(`${ticket.unidad}`, 25, 79);
 
     doc.setFont("helvetica", "bold");
-    doc.text(`Prioridad:`, 153, 83);
+    doc.text(`Prioridad:`, 153, 74);
     doc.setFont("helvetica", "normal");
-    doc.text(`${ticket.prioridad}`, 153, 88);
+    doc.text(`${ticket.prioridad}`, 153, 79);
 
     doc.setFont("helvetica", "bold");
-    doc.text(`Descripción:`, 25, 95);
+    doc.text(`Descripción:`, 25, 86);
     doc.setFont("helvetica", "normal");
-    doc.text(`${ticket.descripcion}`, 25, 100);
+    doc.text(ticket.descripcion, 25, 91,{ maxWidth: 166 });
 
     // // Tabla técnico
-    drawRect(15, 113, 186, 67, 0.1);
-    drawRect(15, 113, 186, 8, 0.1);
+    drawRect(15, 116, 186, 64, 0.1);
+    drawRect(15, 116, 186, 6, 0.1);
 
     // Técnico
-    doc.setFontSize(12);
-    textCenter("SUPERVISOR DE MANTENIMIENTO", 215.9, 118.5);
+    doc.setFontSize(11);
+    textCenter("SUPERVISOR DE MANTENIMIENTO", 215.9, 120.5);
     // Insertar información del supervisor
     doc.setFontSize(10);
     doc.text(`Fecha programada:  ________________`, 125, 129);
@@ -98,9 +98,7 @@ export async function generatePDF(ticket) {
     doc.setFont("helvetica", "bold");
     doc.text(`Observaciones:`, 25, 149);
     doc.setFont("helvetica", "normal");
-    doc.text(`${ticket.observaciones}`, 25, 155);
-    doc.text(`____________________________________________________________________________________`, 25, 161);
-    doc.text(`____________________________________________________________________________________`, 25, 167);
+    doc.text(`${ticket.observaciones}`, 25, 155, { maxWidth: 166 });
 
     doc.text(`¿La falla genera paro de producción?           Sí             No             No aplica              Tiempo: __________`, 25, 174);
     drawRect(101, 170, 5, 5, 0.1);
@@ -108,20 +106,20 @@ export async function generatePDF(ticket) {
     drawRect(146, 170, 5, 5, 0.1);
 
     // Tabla cumplimiento
-    drawRect(15, 187, 186, 35, 0.1);
-    drawRect(15, 187, 186, 8, 0.1);
+    drawRect(15, 187, 186, 33, 0.1);
+    drawRect(15, 187, 186, 6, 0.1);
 
     // Seguimiento
-    doc.setFontSize(12);
-    textCenter("CUMPLIMIENTO Y/O REPROGRAMACIÓN", 215.9, 192.5);
+    doc.setFontSize(11);
+    textCenter("CUMPLIMIENTO Y/O REPROGRAMACIÓN", 215.9, 191.5);
     // Insertar información del reporte
     doc.setFontSize(10);
-    doc.text(`¿Se cumplió la tarea?                     Sí                       No`, 25, 203);
-    drawRect(87, 199, 5, 5, 0.1);
-    drawRect(114, 199, 5, 5, 0.1);
+    doc.text(`¿Se cumplió la tarea?                     Sí                       No`, 25, 200);
+    drawRect(87, 196, 5, 5, 0.1);
+    drawRect(114, 196, 5, 5, 0.1);
 
-    doc.text(`En caso de no cumplir, anotar motivo: _____________________________________________________`, 25, 210);
-    doc.text(`____________________________________________________________________________________`, 25, 216);
+    doc.text(`En caso de no cumplir, anotar motivo: _____________________________________________________`, 25, 207);
+    doc.text(`____________________________________________________________________________________`, 25, 213);
 
     // Espacio de firmas
     // drawRect(15, 229, 186, 33, 0.1);

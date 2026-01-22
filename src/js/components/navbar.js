@@ -1,3 +1,6 @@
+import supabase from '../supabase/supabase-client'
+// Servicios supabase
+import { getSession, getUserProfile } from '../services/login-service';
 
 document.addEventListener("DOMContentLoaded", async () => {
     const bar = document.getElementById("top-bar");
@@ -10,7 +13,47 @@ document.addEventListener("DOMContentLoaded", async () => {
     createFooter(footer);
     // Marcar la pestaña activa en la navbar
     activePage();
+    // Mostrar mensaje dirigido al usuario
+    await showUserName();
 });
+
+function getRolName(rol) {
+    switch (rol) {
+        case 'admin': return 'Administrador';
+        case 'mant': return 'Mantenimiento';
+        case 'prod': return 'Producción';
+        case 'emb': return 'Embarques';
+        case 'vent': return 'Ventas';
+        case 'trans': return 'Transportes';
+        case 'fact': return 'Facturación';
+        case 'colab': return 'Colaborador';
+        case 'view': return 'Visualización';
+        default: return rol;
+    }
+}
+
+async function showUserName() {
+    try {
+        const session = await getSession();
+        if (!session) return;
+
+        const profile = await getUserProfile(session);
+        if (!profile) return;
+
+        const { rol, nombre, apellido } = profile;
+
+        const userInfoDiv = document.getElementById("user-info");
+        if (userInfoDiv) {
+            userInfoDiv.innerHTML = `
+                <span class="small">Hola, <strong>${nombre + " " + apellido[0]}</strong></span>
+                <span class="small">Rol: <strong>${getRolName(rol)}</strong></span>
+            `;
+        }
+
+    } catch (error) {
+        console.error('Error mostrando nombre de usuario:', error);
+    }
+}
 
 // Crear barra superior
 function createBar(bar) {
@@ -29,6 +72,21 @@ function createBar(bar) {
             </button>
         </div>`
     );
+
+    document.getElementById("btn-logout").addEventListener("click", logOut);
+}
+
+// Función para cerrar sesión con Supabase
+async function logOut() {
+    try {
+        const { error } = await supabase.auth.signOut();
+        if (error) console.error("Error al cerrar sesión:", error);
+
+        window.location.href = "./login.html";
+    } catch (error) {
+        console.error("Error inesperado al cerrar sesión:", error);
+        window.location.href = "./login.html";
+    }
 }
 
 // Crear navbar
@@ -46,7 +104,7 @@ function createNavbar(navbar) {
             <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item ms-2 me-2"><a class="nav-link nav-prin" href="./tickets.html">Tickets</a></li>
-                    <li class="nav-item ms-2 me-2"><a class="nav-link nav-prin" href="./report.html">Reporte</a></li>
+                    <li class="nav-item ms-2 me-2"><a class="nav-link nav-prin d-none" href="./report.html" data-mant-only>Reporte</a></li>
                 </ul>
             </div>
             <svg id="nav-fill" xmlns="http://www.w3.org/2000/svg" width="62" height="62" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">

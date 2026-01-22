@@ -11,6 +11,7 @@ import '../components/navbar.js';
 import '../components/tickets/generate-form.js'
 
 // Servicios Supabase
+import { initPage } from '../utils/session-validate.js'; 
 import { addTicket } from '../components/tickets/tickets-form.js';
 import { ticketsFilter } from '../components/tickets/tickets-filter..js';
 import { renderTicketsTable } from '../components/tickets/tickets-table.js';
@@ -18,6 +19,7 @@ import { renderTicketsEditModal } from '../components/tickets/tickets-modal.js';
 import { generatePDF } from '../components/tickets/tickets-print.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
+    await initPage()
     // Generar tabla con el día actual
     await renderTicketsTable()
 });
@@ -50,7 +52,7 @@ editModal.addEventListener('shown.bs.modal', event => {
     // Elimina eventos anteriores para evitar duplicados
     btnSave.onclick = async function () {
         const doc = await generatePDF(ticketData);
-        doc.save(`Ticket-${ticketData.id_ticket}.pdf`);
+        window.open(doc.output('bloburl'), '_blank');
     };
 });
 // Al cerrar modal

@@ -10,11 +10,13 @@ import './css/components/footer.css';
 import './js/components/navbar.js';
 
 // Servicios Supabase
+import { initPage } from './js/utils/session-validate.js';
 import { createResumeCards } from './js/components/report/report-cards.js'; 
 import { reportFilter } from './js/components/report/report-filter.js'; 
 import { renderReportTable } from './js/components/report/report-table.js'; 
 
 document.addEventListener('DOMContentLoaded', async () => {
+    await initPage()
     // Generar tabla con el día actual
     createResumeCards()
     reportFilter(renderReportTable)

@@ -10,6 +10,7 @@ import '../../css/components/footer.css'
 import '../components/navbar.js';
 
 // Servicios Supabase
+import { initPage } from '../utils/session-validate.js'; 
 import { createResumeCards } from '../components/report/report-cards.js';
 import { renderEmployeeGraphic, renderDepartamentGraphic } from '../components/report/report-graphic.js';
 import { reportFilter } from '../components/report/report-filter.js'; 
@@ -18,6 +19,7 @@ import { renderReportTable } from '../components/report/report-table.js';
 let filteredTickets = [];
 
 document.addEventListener('DOMContentLoaded', async () => {
+    await initPage()
     // Generar tabla con el día actual
     createResumeCards()
     renderEmployeeGraphic()

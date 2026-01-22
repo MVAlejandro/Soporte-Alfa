@@ -108,7 +108,7 @@
                             <th class="text-center p-3">PRIORIDAD</th>
                             <th class="text-center p-3">ESTADO</th>
                             <th class="text-center p-3">PROGRESO</th>
-                            <th></th>
+                            <th class="d-none" data-mant-only></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -209,7 +209,7 @@
                                 </div>
                                 <div class="col-md-6 label-over-border edit">
                                     <label for="edit-progress" class="form-label m-2">Progreso</label>
-                                    <select id="edit-progress" class="form-select" aria-label="Default select example">
+                                    <select id="edit-progress" class="form-select" aria-label="Default select example" disabled data-mant-only>
                                         <option value="0">Seleccione...</option>
                                         <option value="Abierto">Abierto</option>
                                         <option value="Terminado">Terminado</option>
@@ -229,7 +229,7 @@
                             <div class="row ms-2 me-2 pt-3 pb-3">
                                 <div class="col label-over-border edit">
                                     <label for="edit-observations" class="form-label m-2">Observaciones</label>
-                                    <input type="text" class="form-control" id="edit-observations" placeholder="Observaciones generales">
+                                    <input type="text" class="form-control" id="edit-observations" placeholder="Observaciones generales" disabled data-mant-only>
                                     <p class="error invalid-feedback" id="error-editObservations" style="color: red;"></p>
                                 </div>
                             </div>
