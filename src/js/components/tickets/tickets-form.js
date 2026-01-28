@@ -20,18 +20,21 @@ export async function addTicket(event) {
     // Referencias para validación
     const id_empleadoIn = document.getElementById('emplyee')
     const id_unidadIn = document.getElementById('unit')
+    const tipoIn = document.getElementById('type')
     const prioridadIn = document.querySelectorAll('input[name="priority"]')
     const descripcionIn = document.getElementById('description')
     const observacionesIn = document.getElementById('observations')
     // Referencias para errores
     const id_empleadoError = document.getElementById('emplyee-error')
     const id_unidadError = document.getElementById('unit-error')
+    const tipoError = document.getElementById('type-error')
     const prioridadError = document.getElementById('priority-error')
     const descripcionError = document.getElementById('description-error')
 
     // Validaciones
     selectValidate(id_empleadoIn, id_empleadoError)
     selectValidate(id_unidadIn, id_unidadError)
+    selectValidate(tipoIn, tipoError)
     radioValidate(prioridadIn, prioridadError)
     textValidate(descripcionIn, descripcionError)
 
@@ -58,16 +61,19 @@ export async function addTicket(event) {
     }
 
     const prioridad = document.querySelector('input[name="priority"]:checked').value;
-    const fecha_creado = new Date();
+    const fecha_creado = new Date().toISOString().split('T')[0]
+    const hora_creado = new Date().toTimeString().slice(0, 8)
 
     // Guardar valores
     const newTicketData = {
         id_empleado: id_empleadoIn.value, 
-        id_unidad: id_unidadIn.value, 
+        id_unidad: id_unidadIn.value,
+        tipo: tipoIn.value,
         prioridad,
         descripcion: descripcionIn.value,
         observaciones: observacionesIn.value,
-        fecha_creado: fecha_creado.toISOString().split('T')[0]
+        fecha_creado,
+        hora_creado
     };
     
     try {

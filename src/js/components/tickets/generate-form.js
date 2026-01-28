@@ -64,6 +64,18 @@ document.addEventListener("DOMContentLoaded", () => {
                         </div>
                         <div class="ms-2 me-2 pt-2 pb-3">
                             <div class="label-over-border">
+                                <label for="type" class="form-label m-2">Tipo Ticket</label>
+                                <select id="type" class="form-select" aria-label="Default select example" disabled>
+                                    <option value="0">Seleccione...</option>
+                                    <option value="Mantenimiento">Mantenimiento</option>
+                                    <option value="Soporte">Soporte</option>
+                                    <option value="Solicitud">Solicitud</option>
+                                </select>
+                                <p class="error invalid-feedback" id="type-error" style="color: red;"></p>
+                            </div>
+                        </div>
+                        <div class="ms-2 me-2 pt-2 pb-3">
+                            <div class="label-over-border">
                                 <label for="observations" class="form-label m-2">Observaciones</label>
                                 <input type="text" id="observations" class="form-control" placeholder="Observaciones adicionales">
                             </div>

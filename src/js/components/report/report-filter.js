@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 // Función de filtrado por valores seleccionados
 export async function reportFilter(renderCallback) {
+    const typeFilter = document.getElementById('type-filter').value;
     const startDate = document.getElementById('start-date').value;
     const endDate = document.getElementById('end-date').value;
 
@@ -23,7 +24,7 @@ export async function reportFilter(renderCallback) {
     allTickets.sort((a, b) => a.id_ticket - b.id_ticket);
 
     // Si no hay filtros activos, mostrar todo
-    const filterClean = !startDate && !endDate;
+    const filterClean = typeFilter === '0' && !startDate && !endDate;
 
     if (filterClean) {
         renderReportTable([]);
@@ -35,10 +36,11 @@ export async function reportFilter(renderCallback) {
 
     // Aplicar filtros
     const filtered = allTickets.filter(t => {
+        const typeOk = typeFilter === '0' || t.tipo == typeFilter;
         const dateOk =
                 (!isNaN(start) ? new Date(t.fecha_creado) >= start : true) &&
                 (!isNaN(end) ? new Date(t.fecha_creado) <= end : true);
-        return dateOk;
+        return typeOk && dateOk;
     });
 
     if (renderCallback) {

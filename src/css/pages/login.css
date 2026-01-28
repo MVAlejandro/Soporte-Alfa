@@ -24,7 +24,7 @@
 }
 
 @media (max-width: 768px) {
-  #btn_login {
+  #btn-auth {
     font-size: 0.8rem;
     padding: 0.4rem 0.8rem;
   }

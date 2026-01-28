@@ -2,13 +2,22 @@ import supabase from '../supabase/supabase-client'
 // Servicios supabase
 import { getSession, getUserProfile } from '../services/login-service';
 
+let logoutIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-in-left me-2" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M10 3.5a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 1 1 0v2A1.5 1.5 0 0 1 9.5 14h-8A1.5 1.5 0 0 1 0 12.5v-9A1.5 1.5 0 0 1 1.5 2h8A1.5 1.5 0 0 1 11 3.5v2a.5.5 0 0 1-1 0z"/>
+                    <path fill-rule="evenodd" d="M4.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H14.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708z"/>
+                </svg>`;
+let loginIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-in-right me-2" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0z"/>
+                    <path fill-rule="evenodd" d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z"/>
+                </svg>`;
+
 document.addEventListener("DOMContentLoaded", async () => {
     const bar = document.getElementById("top-bar");
     const navbar = document.getElementById("site-navbar");
     const footer = document.getElementById("site-footer");
 
     // Crear barra superior, navbar y footer
-    createBar(bar);
+    await createBar(bar);
     createNavbar(navbar);
     createFooter(footer);
     // Marcar la pestaña activa en la navbar
@@ -17,6 +26,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     await showUserName();
 });
 
+// Función de mapeo de roles
 function getRolName(rol) {
     switch (rol) {
         case 'admin': return 'Administrador';
@@ -32,17 +42,26 @@ function getRolName(rol) {
     }
 }
 
+// Función para mostrar el nombre del usuario en la barra de navegación
 async function showUserName() {
     try {
+        const userInfoDiv = document.getElementById("user-info");
+        // Si no hay sesión mostrar "Invitado"
         const session = await getSession();
-        if (!session) return;
+        if (!session) {
+            userInfoDiv.innerHTML = `
+                <span class="small">Hola, <strong>Invitado</strong></span>
+                <span class="small">Rol: <strong>-</strong></span>
+            `;
+            return;
+        }
 
+        // Si hay sesión mostrar información del usuario
         const profile = await getUserProfile(session);
         if (!profile) return;
 
         const { rol, nombre, apellido } = profile;
 
-        const userInfoDiv = document.getElementById("user-info");
         if (userInfoDiv) {
             userInfoDiv.innerHTML = `
                 <span class="small">Hola, <strong>${nombre + " " + apellido[0]}</strong></span>
@@ -56,24 +75,31 @@ async function showUserName() {
 }
 
 // Crear barra superior
-function createBar(bar) {
+async function createBar(bar) {
+    const session = await getSession();
+    const isLogged = !!session;
+
     bar.insertAdjacentHTML(
         "beforeend",
         `<div class="logout d-flex justify-content-between">
             <div id="user-info" class="d-flex align-items-end gap-3 ps-3">
                 
             </div>
-            <button id="btn-logout" class="btn d-flex align-items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-in-left me-1" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M10 3.5a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 1 1 0v2A1.5 1.5 0 0 1 9.5 14h-8A1.5 1.5 0 0 1 0 12.5v-9A1.5 1.5 0 0 1 1.5 2h8A1.5 1.5 0 0 1 11 3.5v2a.5.5 0 0 1-1 0z"/>
-                    <path fill-rule="evenodd" d="M4.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H14.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708z"/>
-                </svg>
-                Salir
+            <button id="btn-auth" class="btn d-flex align-items-center">
+                ${isLogged ? logoutIcon + 'Salir' : loginIcon + 'Iniciar sesión'}
             </button>
         </div>`
     );
 
-    document.getElementById("btn-logout").addEventListener("click", logOut);
+    const btn = document.getElementById("btn-auth");
+
+    if (isLogged) {
+        btn.addEventListener("click", logOut);
+    } else {
+        btn.addEventListener("click", () => {
+            window.location.href = "./login.html";
+        });
+    }
 }
 
 // Función para cerrar sesión con Supabase
@@ -82,7 +108,7 @@ async function logOut() {
         const { error } = await supabase.auth.signOut();
         if (error) console.error("Error al cerrar sesión:", error);
 
-        window.location.href = "./login.html";
+        window.location.href = "./index.html";
     } catch (error) {
         console.error("Error inesperado al cerrar sesión:", error);
         window.location.href = "./login.html";

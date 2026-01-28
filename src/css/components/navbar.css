@@ -6,7 +6,7 @@
     height: 38.4px;
 }
 
-#btn-logout {
+#btn-auth {
     color: var(--text-light);
     height: 35px;
     border-radius: 4px;
@@ -17,13 +17,13 @@
     text-transform: none;
 }
 
-#btn-logout:hover {
+#btn-auth:hover {
     background-color: var(--primary);
     border-color: var(--primary);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-#btn-logout:focus {
+#btn-auth:focus {
     outline: none;
     box-shadow: 0 0 10px var(--primary-dark);
 }

@@ -11,8 +11,11 @@ export async function renderTicketsEditModal(ticket) {
     // Insertar valores en los inputs
     document.getElementById('edit-id-ticket').value = ticket.id_ticket;
     document.getElementById('edit-id').value = ticket.id_ticket;
+    document.getElementById('edit-type').value = ticket.tipo;
     document.getElementById('edit-sol-date').value = ticket.fecha_creado;
     document.getElementById('edit-finish-date').value = ticket.fecha_realizado || "-";
+    document.getElementById('edit-sol-time').value = (ticket.hora_creado).slice(0, 5);
+    document.getElementById('edit-finish-time').value = (ticket.hora_realizado).slice(0, 5) || "-";
     document.getElementById('edit-employee').value = ticket.empleado;
     document.getElementById('edit-unit').value = ticket.unidad;
     document.getElementById('edit-departament').value = ticket.departamento;
@@ -21,13 +24,17 @@ export async function renderTicketsEditModal(ticket) {
     document.getElementById('edit-progress').value = ticket.estado_tecnico;
     document.getElementById('edit-description').value = ticket.descripcion;
     document.getElementById('edit-observations').value = ticket.observaciones;
+    const btn = document.getElementById('btn-edit-entry');
+
+    if (ticket.estado_tecnico === 'Terminado') {
+        btn.disabled = true
+    }
 }
 
 // Función para guardar cambios
 document.getElementById('btn-edit-entry').addEventListener('click', async function() {
     const form = document.getElementById('ticket-edit-form');
     // Referencias para validación
-    const fecha_realizadoIn = document.getElementById('edit-finish-date');
     const estado_clienteIn = document.getElementById('edit-status');
     const estado_tecnicoIn = document.getElementById('edit-progress');
     const descripcionIn = document.getElementById('edit-description');
@@ -63,8 +70,10 @@ document.getElementById('btn-edit-entry').addEventListener('click', async functi
 
     // Registrar la fecha de completado del ticket
     if (estado_tecnicoIn.value === 'Terminado') {
-        fecha_realizadoIn.value = new Date().toISOString().split('T')[0];
-        updatedData.fecha_realizado = fecha_realizadoIn.value;
+        const fecha_realizado = new Date().toISOString().split('T')[0]
+        const hora_realizado = new Date().toTimeString().slice(0, 8)
+        updatedData.fecha_realizado = fecha_realizado;
+        updatedData.hora_realizado = hora_realizado;
     }
 
     try {

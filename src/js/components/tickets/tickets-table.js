@@ -96,6 +96,7 @@ export async function renderTicketsTable(ticketsParam = null) {
         tbody.innerHTML += 
         `<tr>
             <td class="ticket-id p-3 ps-4 fw-bold">T0${ticket.id_ticket}</td>
+            <td class="ticket-type p-2">${ticket.tipo}</td>
             <td class="p-3">
                 <p class="ticket-employee fst-italic">${ticket.empleado}</p>
                 <p class="ticket-departament">${ticket.departamento}</p>

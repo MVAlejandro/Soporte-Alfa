@@ -87,7 +87,9 @@ export async function renderReportTable(ticketsParam = null) {
             <td class="p-3 ps-4">
                 <p class="ticket-id fw-bold">T0${ticket.id_ticket}</p>
                 <p class="ticket-date">${ticket.fecha_creado}</p>
+                <p class="ticket-time">${(ticket.hora_creado).slice(0, 5)}</p>
             </td>
+            <td class="ticket-type p-2">${ticket.tipo}</td>
             <td class="p-3">
                 <p class="ticket-employee fst-italic">${ticket.empleado}</p>
                 <p class="ticket-departament">${ticket.departamento}</p>

@@ -18,8 +18,11 @@ export async function getTickets() {
         .from('tickets')
         .select(`
             id_ticket,
+            tipo,
             fecha_creado,
             fecha_realizado,
+            hora_creado,
+            hora_realizado,
             prioridad,
             descripcion,
             estado_cliente,
@@ -42,8 +45,11 @@ export async function getTickets() {
     
     return data.map(ticket => ({
         id_ticket: ticket.id_ticket,
+        tipo: ticket.tipo,
         fecha_creado: ticket.fecha_creado,
         fecha_realizado: ticket.fecha_realizado,
+        hora_creado: ticket.hora_creado,
+        hora_realizado: ticket.hora_realizado,
         prioridad: ticket.prioridad,
         descripcion: ticket.descripcion,
         estado_cliente: ticket.estado_cliente,

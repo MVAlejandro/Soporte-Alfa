@@ -52,13 +52,19 @@
     }
 }
 
+@media (min-width: 500px) and (max-width: 768px) {
+    #filter-btn {
+        margin-top: 1rem;
+    }
+}
+
 /* Estilos de texto para la tabla */
 th {
     color: var(--secondary) !important;
 }
 
 /* Estilos de texto para la tabla */
-.ticket-date, .ticket-departament {
+.ticket-date, .ticket-time, .ticket-departament {
     font-size: 13px;
     color: var(--secondary) !important;
 }

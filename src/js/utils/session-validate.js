@@ -9,9 +9,7 @@ async function validateAuth() {
         const isLoginPage = currentPath === 'login.html';
 
         // Sin sesión → redirigir a login si no estamos en login
-        if (!session && !isLoginPage) {
-            console.log("No hay sesión, redirigiendo a login...");
-            window.location.href = "./login.html"; // ruta absoluta con extensión
+        if (!session) {
             return false;
         }
 
@@ -22,13 +20,10 @@ async function validateAuth() {
             const elapsed = Date.now() - parseInt(loginTimestamp, 10);
             const hoursElapsed = elapsed / (1000 * 60 * 60);
             if (hoursElapsed > SESSION_DURATION_HOURS) {
-                console.log("Sesión expirada automáticamente.");
+                alert("Sesión expirada automáticamente.");
                 await supabase.auth.signOut();
                 localStorage.removeItem('loginTimestamp');
 
-                if (!isLoginPage) {
-                    window.location.href = "./login.html";
-                }
                 return false;
             }
         }
@@ -44,10 +39,6 @@ async function validateAuth() {
 
     } catch (error) {
         console.error('Error verificando autenticación:', error);
-        const currentPath = window.location.pathname.split('/').pop() || 'index.html';
-        if (currentPath !== 'login.html') {
-            window.location.href = "./login.html";
-        }
         return false;
     }
 }
